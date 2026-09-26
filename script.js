@@ -31,12 +31,7 @@ if (city === "") {
     
     let location = geoData.results[0];
 
-if (location.name.toLowerCase() !== city.toLowerCase()) {
-    alert("City not found");
-    return;
-}
-
-document.getElementById("cityInput").value = location.name;
+    document.getElementById("cityInput").value = location.name;
 
     let latitude = location.latitude;
     let longitude = location.longitude;
