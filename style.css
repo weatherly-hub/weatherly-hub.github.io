@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    font-size: 40px;
+}
+
+input {
+    padding: 12px;
+    width: 250px;
+    border: none;
+    border-radius: 8px;
+}
+
+button {
+    padding: 12px 20px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 8px;
+    background: #2196f3;
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background: #1976d2;
+}
+
+h2 {
+    color: white;
+    margin-top: 35px;
+}
+
+p {
+    background: white;
+    display: inline-block;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+#dateTime {
+    background: white;
+    display: inline-block;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+p {
+    min-width: 180px;
+}
+@media (max-width: 600px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    input {
+        width: 200px;
+    }
+
+    p,
+    #dateTime {
+        display: block;
+        margin: 10px auto;
+    }
+}
+.chart-container {
+    width: 90%;
+    max-width: 900px;
+    height: 550px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 400px !important;
+}
+.chart-container h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}

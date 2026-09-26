@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>🌦️ Real-Time Weather Dashboard</h1>
+
+    <div>
+        <input type="text" id="cityInput" placeholder="Enter city name"
+       onkeydown="if(event.key==='Enter') getWeather()">
+        <button onclick="getWeather()">Search</button> 
+        <button id="unitButton" onclick="toggleUnit()">Switch to °F</button>
+
+
+    <h2 id="city">City Name</h2>
+    <p id="dateTime">Last Updated: --</p>
+    <p id="condition">🌤️ Weather Condition</p>
+
+    <p id="temperature">🌡️ Temperature: -- °C</p>
+
+    <p id="humidity">💧 Humidity: -- %</p>
+    <p id="feelsLike">🤗 Feels Like: -- °C</p>
+
+    <p id="wind">💨 Wind Speed: -- km/h</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <div class="chart-container">
+    <h2>Temperature Forecast</h2>
+    <canvas id="temperatureChart"></canvas>
+    
+</div>
+    <div class="chart-container">
+    <h2>Wind Speed Forecast</h2>
+    <canvas id="windChart"></canvas>
+    
+</div>
+</body>
+
+</html>
+
+
