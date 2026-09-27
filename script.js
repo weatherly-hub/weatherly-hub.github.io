@@ -5,6 +5,14 @@ let currentTimezone = "Asia/Kolkata";
 async function getWeather() {
     document.getElementById("condition").textContent = "Loading...";
     let city = document.getElementById("cityInput").value.trim();
+   
+    if (city.toLowerCase() === "ooty") {
+    city = "Udhagamandalam";
+}
+
+if (city.toLowerCase() === "bangalore") {
+    city = "Bengaluru";
+}
 
 if (city !== "") {
     currentCity = city;
@@ -18,9 +26,11 @@ if (city === "") {
         return;
     }
 
-    let geoURL =
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
+    let searchCity = city
+    .replace(/newyork/i, "New York");
 
+let geoURL =
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(searchCity)}&count=100&language=en&format=json`;
     let geoResponse = await fetch(geoURL);
     let geoData = await geoResponse.json();
 
@@ -29,7 +39,28 @@ if (city === "") {
         return;
     }
     
-    let location = geoData.results[0];
+let location = geoData.results.find(
+    place =>
+        place.timezone &&
+        place.latitude !== undefined &&
+        place.longitude !== undefined &&
+        (
+            place.feature_code === "PCLI" ||
+            place.feature_code === "PPLC" ||
+            place.feature_code === "PPLA" ||
+            place.feature_code === "PPLA2" ||
+            place.feature_code === "PPLA3" ||
+            place.feature_code === "PPLA4" ||
+            place.feature_code === "PPL" &&
+place.population >= 15000
+        ) &&
+        place.name.toLowerCase().replace(/\s+/g, "") ===
+        city.toLowerCase().replace(/\s+/g, "")
+);
+if (!location) {
+    alert("City not found");
+    return;
+}
 
     document.getElementById("cityInput").value = location.name;
 
@@ -37,8 +68,7 @@ if (city === "") {
     let longitude = location.longitude;
 
     let weatherURL =
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature&hourly=temperature_2m,wind_speed_10m&forecast_days=1&timezone=auto`;
-
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature&hourly=temperature_2m,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=5&timezone=auto`;
     let weatherResponse = await fetch(weatherURL);
 
 if (!weatherResponse.ok) {
@@ -48,6 +78,18 @@ if (!weatherResponse.ok) {
 
 let weatherData = await weatherResponse.json();
 currentTimezone = weatherData.timezone;
+let forecast = document.getElementById("forecast");
+forecast.innerHTML = "";
+
+for (let i = 0; i < 5; i++) {
+    forecast.innerHTML += `
+        <div class="forecast-day">
+            <h3>${weatherData.daily.time[i]}</h3>
+            <p>🌡️ Max: ${weatherData.daily.temperature_2m_max[i]} °C</p>
+            <p>🌡️ Min: ${weatherData.daily.temperature_2m_min[i]} °C</p>
+        </div>
+    `;
+}
 let labels = weatherData.hourly.time.slice(0, 24).map((time, index) =>
     index % 2 === 0
     ? time.substring(11, 16)
