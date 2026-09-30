@@ -1,51 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Weather Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weatherly - Real-Time Weather Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>🌦️ Real-Time Weather Dashboard</h1>
+    <div class="weather-page">
 
-    <div>
-        <input type="text" id="cityInput" placeholder="Enter city name"
-       onkeydown="if(event.key==='Enter') getWeather()">
-        <button onclick="getWeather()">Search</button> 
-        <button id="unitButton" onclick="toggleUnit()">Switch to °F</button>
+        <header class="hero">
+            <div class="hero-content">
+                <h1>🌤️ Weatherly</h1>
+                <p class="subtitle">Real-Time Weather Dashboard</p>
+
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="cityInput"
+                        placeholder="Enter city name"
+                        onkeydown="if(event.key==='Enter') getWeather()"
+                    >
+
+                    <button onclick="getWeather()">Search</button>
+
+                    <button id="unitButton" onclick="toggleUnit()">
+                        Switch to °F
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+            <section class="current-weather">
+
+                <h2 id="city">City Name</h2>
+
+                <p id="dateTime">Last Updated: --</p>
+
+                <div class="weather-cards">
+
+                    <div class="weather-card" id="condition">
+                        🌤️ Weather Condition
+                    </div>
+
+                    <div class="weather-card" id="temperature">
+                        🌡️ Temperature: -- °C
+                    </div>
+
+                    <div class="weather-card" id="humidity">
+                        💧 Humidity: -- %
+                    </div>
+
+                    <div class="weather-card" id="feelsLike">
+                        🤗 Feels Like: -- °C
+                    </div>
+
+                    <div class="weather-card" id="wind">
+                        💨 Wind Speed: -- km/h
+                    </div>
+
+                </div>
+
+            </section>
 
 
-    <h2 id="city">City Name</h2>
-    <p id="dateTime">Last Updated: --</p>
-    <p id="condition">🌤️ Weather Condition</p>
+            <section class="chart-container">
 
-    <p id="temperature">🌡️ Temperature: -- °C</p>
+                <h2>Temperature Forecast</h2>
 
-    <p id="humidity">💧 Humidity: -- %</p>
-    <p id="feelsLike">🤗 Feels Like: -- °C</p>
+                <canvas id="temperatureChart"></canvas>
 
-    <p id="wind">💨 Wind Speed: -- km/h</p>
+            </section>
+
+
+            <section class="chart-container">
+
+                <h2>Wind Speed Forecast</h2>
+
+                <canvas id="windChart"></canvas>
+
+            </section>
+
+
+            <section class="forecast-section">
+
+                <h2>5-Day Forecast</h2>
+
+                <div id="forecast"></div>
+
+            </section>
+
+        </main>
+
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <div class="chart-container">
-    <h2>Temperature Forecast</h2>
-    <canvas id="temperatureChart"></canvas>
-    
-</div>
-    <div class="chart-container">
-    <h2>Wind Speed Forecast</h2>
-    <canvas id="windChart"></canvas>
-    
-</div>
-     <div class="forecast-container">
-    <h2>5-Day Forecast</h2>
-    <div id="forecast"></div>
-</div>
+
 </body>
-
+body.weather-storm {
+    background:
+        linear-gradient(rgba(15, 20, 35, 0.35), rgba(40, 45, 65, 0.35)),
+        url("./images/thunder.jpg/thunder.jpg")
+        center/cover fixed !important;
+}
 </html>
-
-

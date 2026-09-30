@@ -39,24 +39,21 @@ let geoURL =
         return;
     }
     
+let normalizedCity = city.toLowerCase().replace(/\s+/g, "");
+
 let location = geoData.results.find(
     place =>
-        place.timezone &&
-        place.latitude !== undefined &&
-        place.longitude !== undefined &&
-        (
-            place.feature_code === "PCLI" ||
-            place.feature_code === "PPLC" ||
-            place.feature_code === "PPLA" ||
-            place.feature_code === "PPLA2" ||
-            place.feature_code === "PPLA3" ||
-            place.feature_code === "PPLA4" ||
-            place.feature_code === "PPL" &&
-place.population >= 15000
-        ) &&
-        place.name.toLowerCase().replace(/\s+/g, "") ===
-        city.toLowerCase().replace(/\s+/g, "")
+        place.name &&
+        place.name.toLowerCase().replace(/\s+/g, "") === normalizedCity
 );
+
+if (!location) {
+    location = geoData.results.find(
+        place =>
+            place.admin1 &&
+            place.admin1.toLowerCase().replace(/\s+/g, "") === normalizedCity
+    );
+}
 if (!location) {
     alert("City not found");
     return;
@@ -191,7 +188,23 @@ else if (code <= 77) {
 else {
     condition = "⛈️ Thunderstorm";
 }
+document.body.className = "";
 
+if (code === 0) {
+    document.body.classList.add("weather-sunny");
+}
+else if (code <= 3) {
+    document.body.classList.add("weather-cloudy");
+}
+else if (code <= 67) {
+    document.body.classList.add("weather-rain");
+}
+else if (code <= 77) {
+    document.body.classList.add("weather-snow");
+}
+else {
+    document.body.classList.add("weather-storm");
+}
 document.getElementById("condition").textContent = condition;
 document.getElementById("dateTime").textContent =
     new Date().toLocaleString();
