@@ -262,35 +262,35 @@ p {
 body.weather-sunny {
     background:
         linear-gradient(rgba(135, 206, 250, 0.25), rgba(255, 220, 120, 0.25)),
-        url("./images/clo/sunny.jpg/suuny.jpg")
+        url("./suuny.jpg")
         center/cover fixed !important;
 }
 
 body.weather-cloudy {
     background:
         linear-gradient(rgba(100, 120, 140, 0.45), rgba(210, 220, 230, 0.55)),
-        url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=2000&q=85")
+        url("./cloudy.jgp.jpg")
         center/cover fixed;
 }
 
 body.weather-rain {
     background:
         linear-gradient(rgba(25, 45, 60, 0.35), rgba(60, 80, 95, 0.35)),
-        url("./images/rainny.jpg/rainny.jpg")
+        url("./rainny.jpg.jpg")
         center/cover fixed !important;
 }
 
 body.weather-snow {
     background:
         linear-gradient(rgba(220, 235, 245, 0.45), rgba(180, 205, 220, 0.45)),
-        url("https://images.unsplash.com/photo-1517299321609-52687d1bc55a?auto=format&fit=crop&w=2000&q=85")
+        url("./snow.jpg.jpg")
         center/cover fixed;
 }
 
 body.weather-storm {
     background:
         linear-gradient(rgba(15, 20, 35, 0.35), rgba(40, 45, 65, 0.35)),
-        url("./images/thunder.jpg/thunder.jpg")
+        url("./thunder.jpg")
         center/cover fixed !important;
 }
 /* Professional top section */
