@@ -270,7 +270,7 @@ body.weather-cloudy {
     background:
         linear-gradient(rgba(100, 120, 140, 0.45), rgba(210, 220, 230, 0.55)),
         url("./cloudy.jgp.jpg")
-        center/cover fixed;
+        center/cover fixed !important;
 }
 
 body.weather-rain {
